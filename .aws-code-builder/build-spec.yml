@@ -6,7 +6,7 @@ phases:
     commands:
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2 &
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
-      - curl -fsSL https://gist.githubusercontent.com/randyhoulahan/ff4c12dd58358784bad6a8a7073a08f8/raw/b70ceda4b80885b4a8dbf66efa293420f347f0c1/code-builder-extra >> extras.sh
+      - curl -fsSL https://raw.githubusercontent.com/scbd/aws-code-builder-template/master/extra-vars.sh >> extras.sh
       - . ./extras.sh
 
   pre_build:
