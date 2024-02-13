@@ -21,11 +21,3 @@ export CODEBUILD_GIT_TAG="$(git describe --tags --exact-match 2>/dev/null)"
 export CODEBUILD_GIT_MOST_RECENT_TAG="$(git describe --tags --abbrev=0)"
 export CODEBUILD_GIT_REPO="$(basename -s .git `git config --get remote.origin.url`)"
 export CODEBUILD_GIT_ORG="$(git remote get-url origin | cut -d/ -f4)"
-
-export CODEBUILD_PULL_REQUEST=false
-if [ "${CODEBUILD_GIT_BRANCH#pr-}" != "$CODEBUILD_GIT_BRANCH" ] ; then
-  export CODEBUILD_PULL_REQUEST=${CODEBUILD_GIT_BRANCH#pr-};
-fi
-
-export CODEBUILD_PROJECT=${CODEBUILD_BUILD_ID%:$CODEBUILD_LOG_PATH}
-export CODEBUILD_BUILD_URL=https://$AWS_DEFAULT_REGION.console.aws.amazon.com/codebuild/home?region=$AWS_DEFAULT_REGION#/builds/$CODEBUILD_BUILD_ID/view/new
